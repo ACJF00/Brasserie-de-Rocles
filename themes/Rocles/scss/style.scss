@@ -1,0 +1,540 @@
+/* style.scss */
+@import "variables";
+@import "mixins";
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Montserrat", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// GENERAL CLASSES
+
+h2 {
+  font-size: 2rem;
+  color: $color-green;
+  text-align: center;
+  padding: $space-xl 0;
+}
+
+img {
+  border-radius: 2rem;
+}
+
+.site-wrap {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: $space-l;
+  overflow: hidden;
+}
+
+.display-text {
+  display: flex;
+  flex-direction: column;
+  gap: $space-m;
+}
+
+.button {
+  padding: $space-m $space-l;
+  border: 2px solid $color-green;
+  text-decoration: none;
+  color: $color-green;
+  white-space: nowrap;
+  transition: all 0.3s;
+  width: fit-content;
+  &:hover {
+    background-color: $color-green;
+    color: white;
+  }
+}
+
+// Header
+
+.header {
+  background-color: $color-primary;
+  padding: $space-m;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 7rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transition: top 0.3s;
+  z-index: 50;
+  @media (max-width: $tablet) {
+    height: 4rem;
+  }
+  &__logo-container {
+    height: 100%;
+    flex: 0 1 auto;
+    &--logo {
+      height: 100%;
+      img {
+        height: 100%;
+        width: auto;
+      }
+    }
+  }
+
+  &__description {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    &--title {
+      font-size: 2rem;
+      color: white;
+      @media (max-width: $tablet) {
+        display: none;
+      }
+    }
+  }
+  &__burger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    @media (max-width: $tablet) {
+      display: flex;
+    }
+    &--line {
+      width: 100%;
+      height: 3px;
+      background-color: #333;
+    }
+  }
+  &__nav {
+    align-content: center;
+    font-weight: bold;
+    flex: 0 1 auto;
+    margin-left: auto;
+    @media (max-width: $tablet) {
+      position: absolute;
+      width: 50vw;
+      height: 100vh;
+      background-color: $color-green;
+      top: 0;
+      right: 0;
+      display: none;
+      &.active {
+        display: flex;
+      }
+    }
+    .menu-nav-container {
+      @media (max-width: $tablet) {
+        height: 100%;
+        width: 100%;
+      }
+      .menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+        @media (max-width: $tablet) {
+          flex-direction: column;
+          justify-content: center;
+          gap: $space-m;
+          height: 100%;
+        }
+        a {
+          color: white;
+          text-decoration: none;
+          padding: 10px;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+  &-hidden {
+    top: -120px;
+    position: fixed;
+    width: 100%;
+  }
+}
+
+.header__burger-menu.active .header__burger-menu--line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+  background-color: white;
+}
+
+.header__burger-menu.active .header__burger-menu--line:nth-child(2) {
+  opacity: 0;
+}
+
+.header__burger-menu.active .header__burger-menu--line:nth-child(3) {
+  transform: rotate(-45deg) translate(9px, -9px);
+  background-color: white;
+}
+
+body:not(.home) .header {
+  margin-bottom: $space-l;
+}
+
+body:not(.home) .content-area {
+  flex: 1;
+  margin-top: 9rem;
+}
+
+// Homepage
+
+.entry-content {
+  .presentation-container {
+    display: flex;
+    flex-direction: column;
+    &__content {
+      display: flex;
+      align-items: center;
+      gap: $space-xxl;
+      @media (max-width: $tablet) {
+        flex-direction: column;
+      }
+      &__image {
+        width: 100%;
+        @media (max-width: $tablet) {
+          width: 100%;
+        }
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .biere-container {
+    display: flex;
+    align-items: center;
+    gap: $space-xxl;
+    overflow: hidden;
+    .biere-image {
+      width: 50%;
+      img {
+        width: 100%;
+      }
+    }
+
+    .biere-description {
+      display: flex;
+      flex-direction: column;
+      gap: $space-m;
+      align-items: center;
+      p {
+        font-size: 2rem;
+        color: $color-green;
+        text-align: center;
+      }
+    }
+
+    &:nth-child(odd) {
+      flex-direction: row;
+      @media (max-width: $tablet) {
+        flex-direction: column;
+      }
+    }
+
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+      @media (max-width: $tablet) {
+        flex-direction: column;
+      }
+    }
+  }
+  .labels-container {
+    display: flex;
+    flex-direction: column;
+    .label-container__pictos {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: $space-xxl;
+      @media (max-width: $tablet) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+      a {
+        width: 100%;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}
+
+.hero-section {
+  margin-top: 7rem;
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  min-height: 35rem;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($color-green, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.hero-txt {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+// La brasserie
+
+.who-container {
+  display: flex;
+  align-items: center;
+  gap: $space-xxl;
+  @media (max-width: $tablet) {
+    flex-direction: column;
+  }
+  img {
+    width: 50%;
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
+  }
+}
+
+.text-image {
+  display: flex;
+  gap: $space-xxl;
+  align-items: center;
+  @media (max-width: $tablet) {
+    flex-direction: column;
+  }
+  img {
+    width: 50%;
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
+  }
+}
+
+.image-text {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: $space-xxl;
+  align-items: center;
+  @media (max-width: $tablet) {
+    flex-direction: column;
+  }
+  img {
+    width: 50%;
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
+  }
+}
+
+// Recettes
+.recipes {
+  .swiper-container {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $color-primary;
+      border-radius: 50%;
+      padding: 1.4rem;
+      font-size: 1rem;
+      color: white;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+      font-size: 1rem;
+    }
+    .swiper-button-next {
+      right: 10px;
+    }
+    .swiper-button-prev {
+      left: 10px;
+    }
+    .recette-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: $space-xl;
+      &__content {
+        display: flex;
+        align-items: center;
+        gap: $space-m;
+        @media (max-width: $tablet) {
+          flex-direction: column;
+        }
+      }
+      &__image {
+        width: 45%;
+        @media (max-width: $tablet) {
+          width: 100%;
+        }
+        img {
+          max-height: 20rem;
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+      &__description {
+        width: 50%;
+        @media (max-width: $tablet) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// Footer
+
+.footer {
+  background-color: $color-primary;
+  display: flex;
+  justify-content: space-between;
+  height: 7rem;
+  padding: $space-m;
+  align-items: center;
+  color: white;
+  margin-top: $space-l;
+  @media (max-width: $tablet) {
+    flex-direction: column;
+    text-align: center;
+    gap: $space-xxl;
+    height: fit-content;
+    @media (max-width: $tablet) {
+      gap: $space-m;
+    }
+  }
+  &__logo {
+    height: 100%;
+    img {
+      height: 100%;
+      width: auto;
+      max-height: 4rem;
+    }
+  }
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    @media (max-width: $tablet) {
+      display: none;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+    }
+  }
+}
+
+// Contact
+
+.contact-page {
+  display: flex;
+  flex-direction: column;
+  .contact-info {
+    display: flex;
+    gap: $space-xxl;
+    @media (max-width: $tablet) {
+      flex-direction: column-reverse;
+    }
+    iframe {
+      border-radius: 2rem;
+      @media (max-width: $tablet) {
+        width: 100%;
+        height: 50vh;
+      }
+    }
+  }
+  .wpcf7 {
+    height: 100%;
+  }
+  .contact-form {
+    width: 50%;
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
+    form {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: $space-m;
+      justify-content: space-around;
+      input[type="text"],
+      input[type="email"],
+      textarea {
+        font-family: "Montserrat", sans-serif;
+      }
+
+      input[type="text"]::placeholder,
+      input[type="email"]::placeholder,
+      textarea::placeholder {
+        font-family: "Montserrat", sans-serif;
+      }
+      input,
+      textarea {
+        width: 100%;
+        border-radius: 2rem;
+        border: 1px solid $color-green;
+        padding: 0.5rem;
+
+        &:focus {
+          outline: none;
+          border: 2px solid $color-green;
+        }
+      }
+      textarea {
+        padding: $space-m;
+      }
+    }
+  }
+}
