@@ -127,6 +127,7 @@ add_action('init', 'register_biere_cpt');
 
 function enqueue_custom_fonts() {
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap', false);
+    wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Pacifico&display=swap', false );
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_fonts');
 
@@ -183,3 +184,52 @@ function set_beer_incrementer($post_id) {
     }
 }
 add_action('save_post', 'set_beer_incrementer');
+
+function rocles_custom_logo_setup() {
+    $defaults = array(
+        'height'      => 100,
+        'width'       => 400,
+        'flex-height' => true,
+        'flex-width'  => true,
+        'header-text' => array( 'site-title', 'site-description' ),
+    );
+    add_theme_support( 'custom-logo', $defaults );
+}
+add_action( 'after_setup_theme', 'rocles_custom_logo_setup' );
+
+function create_beer_tags_taxonomy() {
+    $labels = array(
+        'name'                       => _x('Tags de Bières', 'taxonomy general name', 'textdomain'),
+        'singular_name'              => _x('Tag de Bière', 'taxonomy singular name', 'textdomain'),
+        'search_items'               => __('Rechercher des Tags', 'textdomain'),
+        'all_items'                  => __('Tous les Tags', 'textdomain'),
+        'parent_item'                => __('Tag Parent', 'textdomain'),
+        'parent_item_colon'          => __('Tag Parent:', 'textdomain'),
+        'edit_item'                  => __('Modifier le Tag', 'textdomain'),
+        'update_item'                => __('Mettre à jour le Tag', 'textdomain'),
+        'add_new_item'               => __('Ajouter un nouveau Tag', 'textdomain'),
+        'new_item_name'              => __('Nom du nouveau Tag', 'textdomain'),
+        'menu_name'                  => __('Tags de Bières', 'textdomain'),
+    );
+
+    $args = array(
+        'hierarchical'          => false,
+        'labels'                => $labels,
+        'show_ui'               => true,
+        'show_admin_column'     => true,
+        'update_count_callback' => '_update_post_term_count',
+        'query_var'             => true,
+        'rewrite'               => array('slug' => 'beer-tag'),
+    );
+
+    register_taxonomy('beer_tag', 'biere', $args);
+}
+
+add_action('init', 'create_beer_tags_taxonomy', 0);
+
+
+function add_custom_query_vars($vars) {
+    $vars[] = 'beer_tag';
+    return $vars;
+}
+add_filter('query_vars', 'add_custom_query_vars');

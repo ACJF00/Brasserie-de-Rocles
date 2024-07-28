@@ -8,6 +8,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   font-family: "Montserrat", sans-serif;
+  background-color: rgba($color-primary, 0.05);
 }
 
 * {
@@ -22,7 +23,6 @@ h2 {
   font-size: 2rem;
   color: $color-green;
   text-align: center;
-  padding: $space-xl 0;
 }
 
 img {
@@ -52,6 +52,7 @@ img {
   white-space: nowrap;
   transition: all 0.3s;
   width: fit-content;
+  cursor: pointer;
   &:hover {
     background-color: $color-green;
     color: white;
@@ -75,6 +76,7 @@ img {
   @media (max-width: $tablet) {
     height: 4rem;
   }
+  
   &__logo-container {
     height: 100%;
     flex: 0 1 auto;
@@ -94,11 +96,13 @@ img {
     &--title {
       font-size: 2rem;
       color: white;
+      font-family: 'Pacifico', cursive;
       @media (max-width: $tablet) {
         display: none;
       }
     }
   }
+
   &__burger-menu {
     display: none;
     flex-direction: column;
@@ -116,13 +120,34 @@ img {
       width: 100%;
       height: 3px;
       background-color: #333;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    &.active {
+      .header__burger-menu--line {
+        &:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+          background-color: white;
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          transform: rotate(-45deg) translate(9px, -9px);
+          background-color: white;
+        }
+      }
     }
   }
+
   &__nav {
     align-content: center;
     font-weight: bold;
     flex: 0 1 auto;
     margin-left: auto;
+    transition: transform 0.3s ease;
     @media (max-width: $tablet) {
       position: absolute;
       width: 50vw;
@@ -130,9 +155,12 @@ img {
       background-color: $color-green;
       top: 0;
       right: 0;
-      display: none;
+      transform: translateX(100%); // Position initiale hors de l'écran
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       &.active {
-        display: flex;
+        transform: translateX(0); // Position lorsque le menu est actif
       }
     }
     .menu-nav-container {
@@ -162,6 +190,7 @@ img {
       }
     }
   }
+
   &-hidden {
     top: -120px;
     position: fixed;
@@ -169,19 +198,7 @@ img {
   }
 }
 
-.header__burger-menu.active .header__burger-menu--line:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-  background-color: white;
-}
 
-.header__burger-menu.active .header__burger-menu--line:nth-child(2) {
-  opacity: 0;
-}
-
-.header__burger-menu.active .header__burger-menu--line:nth-child(3) {
-  transform: rotate(-45deg) translate(9px, -9px);
-  background-color: white;
-}
 
 body:not(.home) .header {
   margin-bottom: $space-l;
@@ -217,44 +234,52 @@ body:not(.home) .content-area {
     }
   }
 
-  .biere-container {
-    display: flex;
-    align-items: center;
-    gap: $space-xxl;
-    overflow: hidden;
-    .biere-image {
-      width: 50%;
-      img {
-        width: 100%;
-      }
-    }
-
-    .biere-description {
+  .bieres-container {
+    @media (max-width: $tablet) {
       display: flex;
       flex-direction: column;
-      gap: $space-m;
+      gap: $space-xxl;
+    }
+    .biere-container {
+      display: flex;
       align-items: center;
-      p {
-        font-size: 2rem;
-        color: $color-green;
-        text-align: center;
+      gap: $space-xxl;
+      overflow: hidden;
+      .biere-image {
+        width: 50%;
+        img {
+          width: 100%;
+        }
       }
-    }
-
-    &:nth-child(odd) {
-      flex-direction: row;
-      @media (max-width: $tablet) {
+  
+      .biere-description {
+        display: flex;
         flex-direction: column;
+        gap: $space-m;
+        align-items: center;
+        p {
+          font-size: 2rem;
+          color: $color-green;
+          text-align: center;
+        }
       }
-    }
-
-    &:nth-child(even) {
-      flex-direction: row-reverse;
-      @media (max-width: $tablet) {
-        flex-direction: column;
+  
+      &:nth-child(odd) {
+        flex-direction: row;
+        @media (max-width: $tablet) {
+          flex-direction: column;
+        }
+      }
+  
+      &:nth-child(even) {
+        flex-direction: row-reverse;
+        @media (max-width: $tablet) {
+          flex-direction: column;
+        }
       }
     }
   }
+
   .labels-container {
     display: flex;
     flex-direction: column;
@@ -370,10 +395,12 @@ body:not(.home) .content-area {
 
 // Recettes
 .recipes {
-  .swiper-container {
+  .swiper-main {
     position: relative;
     overflow: hidden;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: $space-l;
+    box-shadow: inset 0 0 5px rgba($color-green, 0.3);
     .swiper-button-next,
     .swiper-button-prev {
       display: flex;
@@ -402,7 +429,10 @@ body:not(.home) .content-area {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: $space-xl;
+      padding: $space-xl $space-xl 0rem $space-xl;
+      &__title {
+        padding: $space-m;
+      }
       &__content {
         display: flex;
         align-items: center;
@@ -430,6 +460,204 @@ body:not(.home) .content-area {
       }
     }
   }
+}
+
+// All beers
+
+.all-beers {
+  padding: 2rem;
+
+  @media (max-width: $tablet) {
+    padding: 0;
+  }
+
+  &-filters {
+    margin-bottom: 2rem;
+    text-align: center;
+    display: flex;
+    gap: 0.5rem;
+    margin-left: auto;
+    width: fit-content;
+    font-size: 0.8rem;
+
+    a {
+      padding: 0.5rem 1rem;
+      background-color: rgba($color-primary, 0.7);
+      border-radius: 4px;
+      text-decoration: none;
+      color: black;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $color-green;
+        color: white;
+      }
+
+      
+      &.active {
+        background-color: $color-green;
+        color: #fff;
+        font-weight: bold;
+      }
+    }
+  }
+
+  a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  &-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &-header {
+    background-color: $color-green;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  &-title {
+    font-size: 1.5rem;
+    margin: 0;
+    color: white;
+  }
+
+  &-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    flex: 1;
+  }
+
+  &-thumbnail img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  &-description {
+    text-align: center;
+    flex: 1;
+  }
+
+  &-image {
+    width: 100%;
+    height: 15rem;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &-description,
+  &-prix,
+  &-conditionnement {
+    margin: 0.5rem 0;
+  }
+
+  &-tags {
+    margin-top: 1rem;
+
+    .beer-tag {
+      display: inline-block;
+      background-color: $color-green;
+      color: white;
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+      margin-right: 0.5rem;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+
+// Single beer
+
+.single-beer {
+  display: flex;
+  flex-direction: column;
+  gap: $space-l;
+  &-title {
+    text-align: center;
+    font-size: 3rem;
+    color: $color-green;
+  }
+  &-description {
+    font-size: 2rem;
+    color: $color-green;
+    text-align: center;
+    margin-bottom: $space-xxl;
+  }
+  &-recipe {
+    display: flex;
+    gap: $space-l;
+    &__text {
+      h2 {
+        padding: 0 0 $space-xl 0;
+      }
+    }
+  }
+  .swiper-nested {
+    width: 100%;
+    height: fit-content;
+    overflow: hidden;
+    z-index: 99999;
+    margin-left: auto;
+    position: relative;
+    padding: 30px 0;
+      .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+    .point-de-vente {
+      &-logo {
+        height: 4rem;
+        img {
+          height: 100%;
+          border-radius: 0;
+        }
+      }
+      &-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: $space-m;
+      a, h3 {
+        color: $color-primary;
+      }
+      h4 {
+        font-weight: 100;
+      }
+    }
+  }
+  .no-stores {
+    width: 100%;
+    text-align: center;
+  }
+}
 }
 
 // Footer
@@ -509,32 +737,91 @@ body:not(.home) .content-area {
       flex-direction: column;
       gap: $space-m;
       justify-content: space-around;
-      input[type="text"],
-      input[type="email"],
-      textarea {
+      input[type="text"]:not(.button),
+      input[type="email"]:not(.button),
+      textarea:not(.button) {
         font-family: "Montserrat", sans-serif;
       }
-
+      
       input[type="text"]::placeholder,
       input[type="email"]::placeholder,
       textarea::placeholder {
         font-family: "Montserrat", sans-serif;
       }
-      input,
-      textarea {
+      
+      input:not(.button) {
         width: 100%;
         border-radius: 2rem;
         border: 1px solid $color-green;
         padding: 0.5rem;
-
+      
         &:focus {
           outline: none;
           border: 2px solid $color-green;
         }
       }
+
+      .button {
+        display: flex;
+        margin: auto;
+      }
+      
       textarea {
         padding: $space-m;
+        width: 100%;
+        border-radius: 2rem;
+        border: 1px solid $color-green;
       }
     }
   }
+}
+
+
+
+
+// .swiper-nested {
+//   width: 30%;
+//   height: fit-content;
+//   overflow: hidden;
+//   z-index: 99999;
+//   margin-left: auto;
+//   position: relative;
+//   padding: 30px 0;
+//   // .swiper-wrapper {
+//   //   p {
+//   //     align-content: center;
+//   //     font-size: 0.9rem;
+//   //     margin-left: auto;
+//   //   }
+//   // }
+//   // .swiper-slide {
+//   //   display: flex;
+//   //   flex-direction: column;
+//   //   align-items: center;
+//   //   justify-content: center;
+//   // }
+//   .point-de-vente {
+//   //   &-container {
+//   //   text-align: center;
+//   //     a, h3 {
+//   //       color: $color-primary;
+//   //     }
+//   //     h4 {
+//   //       font-weight: 100;
+//   //     }
+//   // }
+//   &-logo {
+//     height: 4rem;
+//     padding-bottom: $space-m;
+//     img {
+//       height: 100%;
+//       border-radius: 0;
+//     }
+//   }
+// }
+
+// }
+
+.swiper-pagination-bullet-active {
+  background-color: $color-green;
 }

@@ -1,0 +1,75 @@
+********************************************************************************
+DUPLICATOR-LITE PACKAGE-LOG: July 26, 2024 3:13 pm
+NOTICE: Do NOT post to public sites or forums 
+********************************************************************************
+VERSION:	1.5.10.1
+WORDPRESS:	6.6.1
+PHP INFO:	8.1.29 | SAPI: fpm-fcgi
+SERVER:		nginx/1.16.0 
+PHP TIME LIMIT: (0) no time limit imposed 
+PHP MAX MEMORY: 4294967296 (256M default) 
+MEMORY STACK: 8MB
+
+********************************************************************************
+DATABASE:
+********************************************************************************
+BUILD MODE:   PHP(query limit - 100)
+MYSQLTIMEOUT: 5000
+MYSQLDUMP:    Is Supported
+TABLES: total:13 | filtered:0 | create:13
+FILTERED: []
+SQL CREATED: 20240726_brasseriederocles_f03685bf0d9d63b21692_20240726151324_database.sql
+SQL FILE SIZE: 1.4MB (1466957)
+SQL FILE TIME: 2024-07-26 15:13:42
+SQL RUNTIME: 0.19 sec.
+
+********************************************************************************
+ARCHIVE (ZIP):
+********************************************************************************
+ARCHIVE DIR:  /Users/charlymuziotti/Local Sites/brasserie-de-rocles/app/public
+ARCHIVE FILE: 20240726_brasseriederocles_f03685bf0d9d63b21692_20240726151324_archive.zip
+FILTERS: *OFF*
+DIRS:
+	not set
+FILES:
+	not set
+EXTS:  not set
+----------------------------------------
+COMPRESSING
+SIZE:	116.16MB
+STATS:	Dirs 854 | Files 5,281
+SQL ADDED: 20240726_brasseriederocles_f03685bf0d9d63b21692_20240726151324_database.sql
+ZipArchive Object
+(
+    [lastId] => 6134
+    [status] => 0
+    [statusSys] => 0
+    [numFiles] => 6135
+    [filename] => /Users/charlymuziotti/Local Sites/brasserie-de-rocles/app/public/wp-content/backups-dup-lite/tmp/20240726_brasseriederocles_f03685bf0d9d63b21692_20240726151324_archive.zip
+    [comment] => 
+)
+
+FILE ADDED TO ZIP: 6134
+COMPRESSION RESULT: '1'
+COMPRESSED SIZE: 45.15MB
+ARCHIVE RUNTIME: 19.69 sec.
+MEMORY STACK: 10MB
+building installer
+ARCHIVE CONSISTENCY TEST: PASS
+
+********************************************************************************
+INTEGRITY CHECKS:
+********************************************************************************
+SQL FILE: 1.4MB
+INSTALLER FILE: 73.48KB
+ARCHIVE FILE: 47.04MB 
+EXPECTED FILE/DIRECTORY COUNT: 6,135
+ACTUAL FILE/DIRECTORY COUNT: 6,134
+ARCHIVE CONSISTENCY TEST: Pass
+
+********************************************************************************
+RECORD ID:[2]
+TOTAL PROCESS RUNTIME: 25.58 sec.
+PEAK PHP MEMORY USED: 10MB
+DONE PROCESSING => 20240726_brasseriederocles July 26, 2024 3:14 pm
+
