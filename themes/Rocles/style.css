@@ -906,7 +906,7 @@ body:not(.home) .content-area {
   text-decoration: underline;
 }
 .footer .footer__logo img {
-  max-width: 150px;
+  max-width: 120px;
   height: auto;
 }
 .footer__right-container {

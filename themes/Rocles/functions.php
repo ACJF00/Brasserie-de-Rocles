@@ -285,4 +285,27 @@ function enqueue_fontawesome() {
 }
 add_action('wp_enqueue_scripts', 'enqueue_fontawesome');
 
+function mytheme_customize_register($wp_customize) {
+    // Ajouter une section pour les réseaux sociaux
+    $wp_customize->add_section('social_media', array(
+        'title' => __('Social Media', 'mytheme'),
+        'description' => __('Add social media links here.'),
+        'priority' => 30,
+    ));
+
+    // Ajouter un paramètre et un contrôle pour l'URL Facebook
+    $wp_customize->add_setting('facebook_url', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+
+    $wp_customize->add_control('facebook_url', array(
+        'label' => __('Facebook URL', 'mytheme'),
+        'section' => 'social_media',
+        'type' => 'url',
+    ));
+}
+
+add_action('customize_register', 'mytheme_customize_register');
+
 

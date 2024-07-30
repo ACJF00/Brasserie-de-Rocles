@@ -30,7 +30,6 @@
             <?php else : ?>
                 <p class="header__description--title"><?php bloginfo('name'); ?></p>
             <?php endif; ?>
-            <p class="header__description--description"><?php bloginfo('description'); ?></p>
         </div>
 
         <button class="header__burger-menu" aria-label="Menu">

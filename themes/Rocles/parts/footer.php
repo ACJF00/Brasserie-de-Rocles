@@ -21,11 +21,16 @@
             ?>
         </nav>
         <div class="footer__right-container">
-            <div class="footer__social">
-                <a href="https://www.facebook.com/your-page" target="_blank" aria-label="Facebook">
+        <div class="footer__social">
+            <?php
+            $facebook_url = get_theme_mod('facebook_url'); 
+            if ($facebook_url) :
+            ?>
+                <a href="<?php echo esc_url($facebook_url); ?>" target="_blank" aria-label="Facebook">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-            </div>
+            <?php endif; ?>
+        </div>
 
             <p class="footer__rights">&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. Tous droits réservés.</p>
         </div>
