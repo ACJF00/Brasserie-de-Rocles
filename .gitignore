@@ -1,6 +1,2 @@
-/.DS_Store
-/index.php
-/languages
-/plugins
-/upgrade
-/uploads
+/*
+!/themes/

@@ -57,6 +57,65 @@ h2 {
   color: white;
 }
 
+.button--alert {
+  background-color: #d45c5c;
+  color: white;
+  border: 2px solid #d45c5c;
+}
+.button--alert:hover {
+  background-color: white;
+  color: #d45c5c;
+}
+
+.age-verification {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.age-verification-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 30%;
+  min-width: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.age-verification-content__buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+.age-button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.age-button:hover {
+  background-color: #0056b3;
+}
+
 .contact-banner {
   background-color: black;
   padding: 3rem;
@@ -337,12 +396,37 @@ body:not(.home) .content-area {
 .entry-content .points-de-vente-container .swiper-points-de-vente {
   height: 15rem;
   position: relative;
+  overflow: hidden;
+  padding: 0 5rem;
 }
 .entry-content .points-de-vente-container .swiper-points-de-vente .swiper-slide {
   display: flex;
 }
 .entry-content .points-de-vente-container .swiper-points-de-vente .swiper-slide a {
   color: #D4A373;
+}
+.entry-content .points-de-vente-container .swiper-points-de-vente .swiper-button__container {
+  height: 100% !important;
+  background-color: #f2f2f2;
+  width: 61px;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.entry-content .points-de-vente-container .swiper-points-de-vente .swiper-button__container-next {
+  left: auto;
+  top: 0;
+  right: 0;
+}
+.entry-content .points-de-vente-container .swiper-points-de-vente .swiper-button__container-prev {
+  right: auto;
+  top: 0;
+  left: 0;
+}
+.entry-content .points-de-vente-container.site-wrap {
+  overflow: visible;
 }
 .entry-content .point-de-vente-container {
   text-align: center;
@@ -1003,6 +1087,16 @@ body:not(.home) .content-area {
 .contact-page .wpcf7 {
   height: 100%;
 }
+.contact-page .wpcf7-response-output {
+  border-color: black !important;
+  text-align: center;
+  padding: 1rem !important;
+}
+.contact-page .wpcf7 .invalid .wpcf7-response-output,
+.contact-page .wpcf7 .failed .wpcf7-response-output {
+  border-color: red !important;
+  color: red;
+}
 .contact-page .contact-form {
   width: 50%;
 }
@@ -1053,13 +1147,15 @@ body:not(.home) .content-area {
   background-color: #556B2F;
 }
 
-.swiper-button-prev, .swiper-button-next {
+.swiper-button-prev,
+.swiper-button-next {
   background-color: #556B2F;
   border-radius: 50%;
   padding: 1.4rem;
 }
 
-.swiper-button-prev::after, .swiper-button-next::after {
+.swiper-button-prev::after,
+.swiper-button-next::after {
   color: white;
   font-size: 1rem;
 }

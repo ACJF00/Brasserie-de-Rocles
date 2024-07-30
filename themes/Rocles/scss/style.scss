@@ -61,7 +61,66 @@ h2 {
   }
 }
 
+.button--alert {
+  background-color: $color-alert;
+  color: white;
+  border: 2px solid $color-alert;
+  &:hover {
+    background-color: white;
+    color: $color-alert;
+  }
+}
+
 // Parts
+
+.age-verification {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.age-verification-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 30%;
+  min-width: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: $space-m;
+  &__buttons {
+    display: flex;
+    gap: $space-m;
+  }
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+.age-button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.age-button:hover {
+  background-color: #0056b3;
+}
 
 .contact-banner {
   background-color: $color-primary;
@@ -77,7 +136,8 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('/wp-content/uploads/2024/07/hero-img.jpg') center/cover no-repeat;
+    background: url("/wp-content/uploads/2024/07/hero-img.jpg") center/cover
+      no-repeat;
     z-index: 1;
   }
 
@@ -152,7 +212,6 @@ h2 {
     }
   }
 }
-
 
 // Header
 
@@ -333,24 +392,23 @@ body:not(.home) .content-area {
 
   .gamme-container {
     &__content {
-       display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    .gamme-text {
-      text-align: center;
-    }
-    .gamme-image {
-      width: 100%;
-      height: 30rem;
-      img {
-        height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      .gamme-text {
+        text-align: center;
+      }
+      .gamme-image {
         width: 100%;
-        object-fit: cover;
+        height: 30rem;
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
       }
     }
-    }
-
   }
 
   .points-de-vente-container {
@@ -358,15 +416,41 @@ body:not(.home) .content-area {
     .swiper-points-de-vente {
       height: 15rem;
       position: relative;
+      overflow: hidden;
+      padding: 0 5rem;
       .swiper-slide {
         display: flex;
         a {
           color: $color-secondary;
         }
       }
+      .swiper-button__container {
+        height: 100% !important;
+          background-color: #f2f2f2;
+          width: 61px;
+          position: absolute;
+          z-index: 1;
+          cursor: pointer;
+
+          display: flex;
+          align-items: center;
+        &-next {
+          left: auto;
+          top: 0;
+          right: 0;
+        }
+        &-prev {
+          right: auto;
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+    &.site-wrap {
+      overflow: visible;
     }
   }
-  
+
   .point-de-vente-container {
     text-align: center;
     padding: 1rem;
@@ -376,7 +460,7 @@ body:not(.home) .content-area {
     display: flex;
     flex-direction: column;
     flex: 1;
-    
+
     .point-de-vente-logo {
       flex: 1;
       align-content: center;
@@ -386,17 +470,17 @@ body:not(.home) .content-area {
         border-radius: 0;
       }
     }
-  
+
     .point-de-vente-title {
       font-size: 1.2rem;
       margin: 0.5rem 0;
     }
-  
+
     .point-de-vente-ville,
     .point-de-vente-address {
       margin: 0.2rem 0;
     }
-  
+
     .google-maps-link {
       img {
         width: 24px;
@@ -526,8 +610,6 @@ body:not(.home) .content-area {
 }
 
 .hero-section {
-
-
   .hero-text {
     position: absolute;
     top: 50%;
@@ -548,7 +630,6 @@ body:not(.home) .content-area {
     }
   }
 }
-
 
 // La brasserie
 
@@ -856,7 +937,7 @@ body:not(.home) .content-area {
       display: flex;
       gap: $space-l;
       justify-content: center;
-    flex-wrap: wrap;
+      flex-wrap: wrap;
       .conditionnement {
         display: flex;
         flex-direction: column;
@@ -1009,56 +1090,55 @@ body:not(.home) .content-area {
       height: auto;
     }
   }
-&__right-container {
-  display: flex;
-  flex-direction: column;
-  gap: $space-l;
-  align-items: center;
-  margin-left: auto;
+  &__right-container {
+    display: flex;
+    flex-direction: column;
+    gap: $space-l;
+    align-items: center;
+    margin-left: auto;
     .footer__social {
-    a {
-      background-color: $color-secondary;
-      border-radius: 50%;
-      width: 2rem;
-      height: 2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-      transition: all 0.3s;
-      border: 1px solid $color-secondary;
-      &:hover {
-        background-color: $color-primary;
-        border: 1px solid white;
+      a {
+        background-color: $color-secondary;
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.3s;
+        border: 1px solid $color-secondary;
+        &:hover {
+          background-color: $color-primary;
+          border: 1px solid white;
+          i {
+            color: white;
+          }
+        }
         i {
-          color: white;
+          color: $color-primary;
+          transition: all 0.3s;
+        }
+        img {
+          width: 24px;
+          height: 24px;
         }
       }
-      i {
-        color: $color-primary;
-        transition: all 0.3s;
-      }
-      img {
-        width: 24px;
-        height: 24px;
-      }
+    }
+
+    .footer__rights {
+      margin-top: 1rem;
+      font-size: 0.875rem;
     }
   }
 
-  .footer__rights {
-    margin-top: 1rem;
-    font-size: 0.875rem;
+  &__bottom {
+    font-size: 0.9rem;
+    a {
+      color: white;
+    }
   }
 }
-
-&__bottom {
-  font-size: 0.9rem;
-  a {
-    color: white;
-  }
-}
-}
-
 
 // to top
 
@@ -1107,6 +1187,18 @@ body:not(.home) .content-area {
   }
   .wpcf7 {
     height: 100%;
+    &-response-output {
+      border-color: $color-primary !important;
+      text-align: center;
+      padding: 1rem !important;
+    }
+    .invalid,
+    .failed {
+      .wpcf7-response-output {
+        border-color: red !important;
+        color: red;
+      }
+    }
   }
   .contact-form {
     width: 50%;
@@ -1162,13 +1254,15 @@ body:not(.home) .content-area {
   background-color: $color-green;
 }
 
-.swiper-button-prev, .swiper-button-next {
+.swiper-button-prev,
+.swiper-button-next {
   background-color: $color-green;
   border-radius: 50%;
   padding: 1.4rem;
 }
 
-.swiper-button-prev::after, .swiper-button-next::after {
+.swiper-button-prev::after,
+.swiper-button-next::after {
   color: white;
   font-size: 1rem;
 }

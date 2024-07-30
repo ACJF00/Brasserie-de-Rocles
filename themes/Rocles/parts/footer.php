@@ -41,6 +41,22 @@
 <?php wp_footer(); ?>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+    // Check if age verification is needed
+    if (!localStorage.getItem('ageVerified')) {
+        document.getElementById('age-verification').style.display = 'flex';
+    }
+
+    // Handle the age verification buttons
+    document.getElementById('age-yes').addEventListener('click', function() {
+        localStorage.setItem('ageVerified', 'true');
+        document.getElementById('age-verification').style.display = 'none';
+    });
+
+    document.getElementById('age-no').addEventListener('click', function() {
+        window.location.href = 'https://www.google.com'; // Redirect to another site if underage
+    });
+});
+    document.addEventListener('DOMContentLoaded', function() {
         var toTopButton = document.getElementById('toTop');
 
         window.addEventListener('scroll', function() {

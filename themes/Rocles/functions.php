@@ -309,3 +309,53 @@ function mytheme_customize_register($wp_customize) {
 add_action('customize_register', 'mytheme_customize_register');
 
 
+function custom_wpcf7_script() {
+    ?>
+    <script>
+    document.addEventListener('wpcf7mailsent', function(event) {
+        var form = event.target;
+        var responseOutput = form.querySelector('.wpcf7-response-output');
+
+        // Déplacer le message en haut du formulaire
+        form.insertBefore(responseOutput, form.firstChild);
+
+        // Faire défiler vers le haut du formulaire
+        form.scrollIntoView({ behavior: 'smooth' });
+    }, false);
+
+    document.addEventListener('wpcf7invalid', function(event) {
+        var form = event.target;
+        var responseOutput = form.querySelector('.wpcf7-response-output');
+
+        // Déplacer le message en haut du formulaire
+        form.insertBefore(responseOutput, form.firstChild);
+
+        // Faire défiler vers le haut du formulaire
+        form.scrollIntoView({ behavior: 'smooth' });
+    }, false);
+
+    document.addEventListener('wpcf7spam', function(event) {
+        var form = event.target;
+        var responseOutput = form.querySelector('.wpcf7-response-output');
+
+        // Déplacer le message en haut du formulaire
+        form.insertBefore(responseOutput, form.firstChild);
+
+        // Faire défiler vers le haut du formulaire
+        form.scrollIntoView({ behavior: 'smooth' });
+    }, false);
+
+    document.addEventListener('wpcf7mailfailed', function(event) {
+        var form = event.target;
+        var responseOutput = form.querySelector('.wpcf7-response-output');
+
+        // Déplacer le message en haut du formulaire
+        form.insertBefore(responseOutput, form.firstChild);
+
+        // Faire défiler vers le haut du formulaire
+        form.scrollIntoView({ behavior: 'smooth' });
+    }, false);
+    </script>
+    <?php
+}
+add_action('wp_footer', 'custom_wpcf7_script');

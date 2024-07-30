@@ -197,8 +197,12 @@
                   ?>
                 </div>
                 <!-- Ajouter les boutons de navigation -->
-                <div class="swiper-button-next swiper-button-next-points-de-vente"></div>
+                 <div class="swiper-button__container swiper-button__container-next">
+                                 <div class="swiper-button-next swiper-button-next-points-de-vente"></div> 
+                 </div>
+                 <div class="swiper-button__container swiper-button__container-prev">
                 <div class="swiper-button-prev swiper-button-prev-points-de-vente"></div>
+                 </div>
               </div>
             </div>
 
@@ -369,7 +373,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     new Swiper('.swiper-points-de-vente', {
       slidesPerView: 1,
-      spaceBetween: 10,
+      spaceBetween: 20,
       pagination: {
         el: '.swiper-pagination-points-de-vente',
         clickable: true,
@@ -389,7 +393,7 @@
         },
         1024: {
           slidesPerView: 3,
-          spaceBetween: 40,
+
         },
       }
     });

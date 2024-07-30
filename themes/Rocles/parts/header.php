@@ -47,3 +47,15 @@
             ?>
         </nav>
     </header>
+
+    <div id="age-verification" class="age-verification">
+    <div class="age-verification-content">
+        <h2>Veuillez confirmer votre âge</h2>
+        <p>Vous devez avoir l'âge légal pour consommer de l'alcool dans votre pays de résidence pour accéder à ce site.</p>
+        <div class="age-verification-content__buttons">
+                    <button id="age-yes" class="button">J'ai l'âge légal</button>
+        <button id="age-no" class="button button--alert">Je n'ai pas l'âge légal</button>
+        </div>
+
+    </div>
+</div>
