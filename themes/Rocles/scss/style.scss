@@ -21,12 +21,12 @@ body {
 
 h2 {
   font-size: 2rem;
-  color: $color-green;
+  color: white;
   text-align: center;
-}
-
-img {
-  border-radius: 2rem;
+  background-color: $color-primary;
+  width: fit-content;
+  margin: auto;
+  padding: 0.5rem;
 }
 
 .site-wrap {
@@ -36,6 +36,7 @@ img {
   flex-direction: column;
   gap: $space-l;
   overflow: hidden;
+  padding: 2rem 0;
 }
 
 .display-text {
@@ -46,18 +47,112 @@ img {
 
 .button {
   padding: $space-m $space-l;
-  border: 2px solid $color-green;
+  border: 2px solid $color-secondary;
   text-decoration: none;
-  color: $color-green;
+  color: $color-secondary;
   white-space: nowrap;
   transition: all 0.3s;
   width: fit-content;
+  text-transform: uppercase;
   cursor: pointer;
   &:hover {
-    background-color: $color-green;
+    background-color: $color-secondary;
     color: white;
   }
 }
+
+// Parts
+
+.contact-banner {
+  background-color: $color-primary;
+  padding: $space-xl;
+  text-align: center;
+  margin: 2rem 0;
+  position: relative;
+  overflow: hidden;
+
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/wp-content/uploads/2024/07/hero-img.jpg') center/cover no-repeat;
+    z-index: 1;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color-primary, 0.7);
+    z-index: 2;
+  }
+
+  p {
+    font-size: 1.75rem;
+    margin: 0 0 1rem;
+    font-weight: 600;
+  }
+
+  &__content {
+    z-index: 3;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: $space-xl;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+}
+
+.gallery-container {
+  margin: 2rem 0;
+
+  h2 {
+    text-align: center;
+    margin-bottom: $space-l;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    @media (max-width: $tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  a {
+    height: 20rem;
+  }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+      border-radius: 0;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    a {
+      display: block;
+      position: relative;
+    }
+  }
+}
+
 
 // Header
 
@@ -76,7 +171,7 @@ img {
   @media (max-width: $tablet) {
     height: 4rem;
   }
-  
+
   &__logo-container {
     height: 100%;
     flex: 0 1 auto;
@@ -96,7 +191,7 @@ img {
     &--title {
       font-size: 2rem;
       color: white;
-      font-family: 'Pacifico', cursive;
+      font-family: "Pacifico", cursive;
       @media (max-width: $tablet) {
         display: none;
       }
@@ -124,7 +219,7 @@ img {
       transition: all 0.3s ease;
       position: relative;
     }
-    
+
     &.active {
       .header__burger-menu--line {
         &:nth-child(1) {
@@ -198,8 +293,6 @@ img {
   }
 }
 
-
-
 body:not(.home) .header {
   margin-bottom: $space-l;
 }
@@ -215,8 +308,12 @@ body:not(.home) .content-area {
   .presentation-container {
     display: flex;
     flex-direction: column;
+    background-color: $color-primary;
+    padding: $space-l 0;
+    color: white;
     &__content {
       display: flex;
+      flex-direction: row;
       align-items: center;
       gap: $space-xxl;
       @media (max-width: $tablet) {
@@ -230,6 +327,80 @@ body:not(.home) .content-area {
         img {
           width: 100%;
         }
+      }
+    }
+  }
+
+  .gamme-container {
+    &__content {
+       display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    .gamme-text {
+      text-align: center;
+    }
+    .gamme-image {
+      width: 100%;
+      height: 30rem;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    }
+
+  }
+
+  .points-de-vente-container {
+    padding: 2rem 0;
+    .swiper-points-de-vente {
+      height: 15rem;
+      position: relative;
+      .swiper-slide {
+        display: flex;
+        a {
+          color: $color-secondary;
+        }
+      }
+    }
+  }
+  
+  .point-de-vente-container {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    
+    .point-de-vente-logo {
+      flex: 1;
+      align-content: center;
+      img {
+        max-width: 100px;
+        margin-bottom: 1rem;
+        border-radius: 0;
+      }
+    }
+  
+    .point-de-vente-title {
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+    }
+  
+    .point-de-vente-ville,
+    .point-de-vente-address {
+      margin: 0.2rem 0;
+    }
+  
+    .google-maps-link {
+      img {
+        width: 24px;
+        height: 24px;
       }
     }
   }
@@ -251,7 +422,7 @@ body:not(.home) .content-area {
           width: 100%;
         }
       }
-  
+
       .biere-description {
         display: flex;
         flex-direction: column;
@@ -263,14 +434,14 @@ body:not(.home) .content-area {
           text-align: center;
         }
       }
-  
+
       &:nth-child(odd) {
         flex-direction: row;
         @media (max-width: $tablet) {
           flex-direction: column;
         }
       }
-  
+
       &:nth-child(even) {
         flex-direction: row-reverse;
         @media (max-width: $tablet) {
@@ -311,6 +482,8 @@ body:not(.home) .content-area {
   min-height: 35rem;
   background-size: cover;
   background-position: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-content {
@@ -326,29 +499,62 @@ body:not(.home) .content-area {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba($color-green, 0.5);
+  background: rgba($color-secondary, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #fff;
   text-align: center;
+  z-index: 2;
 }
 
 .hero-title {
   font-size: 3rem;
   margin: 0;
+  background-color: $color-primary;
+  padding: 0.5rem;
+  width: fit-content;
+  margin: auto;
 }
 
 .hero-txt {
   font-size: 1.5rem;
   margin-top: 1rem;
+  background-color: $color-primary;
+  padding: 0.5rem;
 }
+
+.hero-section {
+
+
+  .hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 10;
+    width: fit-content;
+  }
+
+  .hero-swiper {
+    height: 100%;
+    .swiper-slide {
+      height: 100%; /* Ajustez selon votre besoin */
+      background-size: cover;
+      background-position: center;
+    }
+  }
+}
+
 
 // La brasserie
 
 .who-container {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: $space-xxl;
   @media (max-width: $tablet) {
@@ -364,6 +570,7 @@ body:not(.home) .content-area {
 
 .text-image {
   display: flex;
+  flex-direction: row;
   gap: $space-xxl;
   align-items: center;
   @media (max-width: $tablet) {
@@ -480,12 +687,16 @@ body:not(.home) .content-area {
     width: fit-content;
     font-size: 0.8rem;
 
+    @media (max-width: $tablet) {
+      display: none;
+    }
+
     a {
       padding: 0.5rem 1rem;
-      background-color: rgba($color-primary, 0.7);
+      background-color: $color-secondary;
       border-radius: 4px;
       text-decoration: none;
-      color: black;
+      color: white;
       transition: background-color 0.3s ease;
 
       &:hover {
@@ -493,11 +704,27 @@ body:not(.home) .content-area {
         color: white;
       }
 
-      
       &.active {
         background-color: $color-green;
         color: #fff;
         font-weight: bold;
+      }
+    }
+  }
+
+  &-filters-mobile {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: block;
+      margin-bottom: 2rem;
+      text-align: left;
+
+      select {
+        padding: 0.5rem;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
       }
     }
   }
@@ -530,7 +757,7 @@ body:not(.home) .content-area {
   }
 
   &-header {
-    background-color: $color-green;
+    background-color: $color-primary;
     padding: 1rem;
     text-align: center;
   }
@@ -539,6 +766,7 @@ body:not(.home) .content-area {
     font-size: 1.5rem;
     margin: 0;
     color: white;
+    margin: auto;
   }
 
   &-content {
@@ -581,7 +809,7 @@ body:not(.home) .content-area {
 
     .beer-tag {
       display: inline-block;
-      background-color: $color-green;
+      background-color: $color-secondary;
       color: white;
       border-radius: 4px;
       padding: 0.2rem 0.5rem;
@@ -590,7 +818,6 @@ body:not(.home) .content-area {
     }
   }
 }
-
 
 // Single beer
 
@@ -612,9 +839,40 @@ body:not(.home) .content-area {
   &-recipe {
     display: flex;
     gap: $space-l;
+    img {
+      width: 50%;
+    }
     &__text {
       h2 {
-        padding: 0 0 $space-xl 0;
+        margin-bottom: $space-xl;
+      }
+    }
+  }
+  &-conditionnements {
+    display: flex;
+    flex-direction: column;
+    gap: $space-l;
+    &__container {
+      display: flex;
+      gap: $space-l;
+      justify-content: center;
+    flex-wrap: wrap;
+      .conditionnement {
+        display: flex;
+        flex-direction: column;
+        gap: $space-m;
+        align-items: center;
+        padding: $space-m;
+        border: 1px solid $color-green;
+        border-radius: 2rem;
+        width: 15%;
+        img {
+          height: 3rem;
+        }
+        h3 {
+          text-align: center;
+          flex: 1;
+        }
       }
     }
   }
@@ -626,82 +884,206 @@ body:not(.home) .content-area {
     margin-left: auto;
     position: relative;
     padding: 30px 0;
-      .swiper-slide {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-    .point-de-vente {
-      &-logo {
-        height: 4rem;
-        img {
-          height: 100%;
-          border-radius: 0;
-        }
-      }
-      &-container {
+    .swiper-slide {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: $space-m;
-      a, h3 {
-        color: $color-primary;
+      justify-content: center;
+    }
+    .point-de-vente {
+      &-logo {
+        height: 4rem;
+        max-width: 8rem;
+        img {
+          height: 100%;
+          border-radius: 0;
+          object-fit: contain;
+          width: 100%;
+        }
       }
-      h4 {
-        font-weight: 100;
+      &-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: $space-m;
+        a,
+        h3 {
+          color: $color-primary;
+        }
+        h4 {
+          font-weight: 100;
+        }
       }
     }
+    .no-stores {
+      width: 100%;
+      text-align: center;
+    }
   }
-  .no-stores {
-    width: 100%;
-    text-align: center;
-  }
-}
 }
 
 // Footer
 
+// .footer {
+//   background-color: $color-primary;
+//   display: flex;
+//   justify-content: space-between;
+//   height: 7rem;
+//   padding: $space-m;
+//   align-items: center;
+//   color: white;
+//   margin-top: $space-l;
+//   @media (max-width: $tablet) {
+//     flex-direction: column;
+//     text-align: center;
+//     gap: $space-xxl;
+//     height: fit-content;
+//     @media (max-width: $tablet) {
+//       gap: $space-m;
+//     }
+//   }
+//   &__logo {
+//     height: 100%;
+//     align-content: center;
+//     img {
+//       height: 100%;
+//       width: auto;
+//       max-height: 4rem;
+//     }
+//   }
+//   ul {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     list-style: none;
+//     @media (max-width: $tablet) {
+//       display: none;
+//     }
+//     a {
+//       color: white;
+//       text-decoration: none;
+//       padding: 10px;
+//     }
+//   }
+// }
+
 .footer {
   background-color: $color-primary;
-  display: flex;
-  justify-content: space-between;
-  height: 7rem;
-  padding: $space-m;
-  align-items: center;
-  color: white;
-  margin-top: $space-l;
-  @media (max-width: $tablet) {
-    flex-direction: column;
-    text-align: center;
-    gap: $space-xxl;
-    height: fit-content;
-    @media (max-width: $tablet) {
-      gap: $space-m;
-    }
-  }
-  &__logo {
-    height: 100%;
-    img {
-      height: 100%;
-      width: auto;
-      max-height: 4rem;
-    }
-  }
-  ul {
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+  .footer__container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    list-style: none;
-    @media (max-width: $tablet) {
-      display: none;
-    }
-    a {
-      color: white;
-      text-decoration: none;
-      padding: 10px;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .footer__nav {
+    .footer__menu {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 1rem;
+      margin-left: $space-xxl;
+
+      ul {
+        list-style: none;
+        text-align: left;
+        font-size: 0.9rem;
+      }
+
+      a {
+        color: #fff;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
+
+  .footer__logo {
+    img {
+      max-width: 150px;
+      height: auto;
+    }
+  }
+&__right-container {
+  display: flex;
+  flex-direction: column;
+  gap: $space-l;
+  align-items: center;
+  margin-left: auto;
+    .footer__social {
+    a {
+      background-color: $color-secondary;
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: 1px solid $color-secondary;
+      &:hover {
+        background-color: $color-primary;
+        border: 1px solid white;
+        i {
+          color: white;
+        }
+      }
+      i {
+        color: $color-primary;
+        transition: all 0.3s;
+      }
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .footer__rights {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+&__bottom {
+  font-size: 0.9rem;
+  a {
+    color: white;
+  }
+}
+}
+
+
+// to top
+
+.to-top {
+  display: none; /* Caché par défaut */
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: $color-primary;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 1000;
+  transition: opacity 0.3s, visibility 0.3s;
+  border: 1px solid white;
+}
+
+.to-top.show {
+  display: block;
+  opacity: 1;
+  visibility: visible;
 }
 
 // Contact
@@ -742,19 +1124,19 @@ body:not(.home) .content-area {
       textarea:not(.button) {
         font-family: "Montserrat", sans-serif;
       }
-      
+
       input[type="text"]::placeholder,
       input[type="email"]::placeholder,
       textarea::placeholder {
         font-family: "Montserrat", sans-serif;
       }
-      
+
       input:not(.button) {
         width: 100%;
         border-radius: 2rem;
         border: 1px solid $color-green;
         padding: 0.5rem;
-      
+
         &:focus {
           outline: none;
           border: 2px solid $color-green;
@@ -765,7 +1147,7 @@ body:not(.home) .content-area {
         display: flex;
         margin: auto;
       }
-      
+
       textarea {
         padding: $space-m;
         width: 100%;
@@ -776,52 +1158,17 @@ body:not(.home) .content-area {
   }
 }
 
-
-
-
-// .swiper-nested {
-//   width: 30%;
-//   height: fit-content;
-//   overflow: hidden;
-//   z-index: 99999;
-//   margin-left: auto;
-//   position: relative;
-//   padding: 30px 0;
-//   // .swiper-wrapper {
-//   //   p {
-//   //     align-content: center;
-//   //     font-size: 0.9rem;
-//   //     margin-left: auto;
-//   //   }
-//   // }
-//   // .swiper-slide {
-//   //   display: flex;
-//   //   flex-direction: column;
-//   //   align-items: center;
-//   //   justify-content: center;
-//   // }
-//   .point-de-vente {
-//   //   &-container {
-//   //   text-align: center;
-//   //     a, h3 {
-//   //       color: $color-primary;
-//   //     }
-//   //     h4 {
-//   //       font-weight: 100;
-//   //     }
-//   // }
-//   &-logo {
-//     height: 4rem;
-//     padding-bottom: $space-m;
-//     img {
-//       height: 100%;
-//       border-radius: 0;
-//     }
-//   }
-// }
-
-// }
-
 .swiper-pagination-bullet-active {
   background-color: $color-green;
+}
+
+.swiper-button-prev, .swiper-button-next {
+  background-color: $color-green;
+  border-radius: 50%;
+  padding: 1.4rem;
+}
+
+.swiper-button-prev::after, .swiper-button-next::after {
+  color: white;
+  font-size: 1rem;
 }

@@ -1,22 +1,58 @@
+<button id="toTop" class="to-top" aria-label="Scroll to top">
+    ↑
+</button>
+
 <footer class="footer">
-    <nav class="footer__nav">
-        <?php
-        wp_nav_menu(array(
-            'theme_location' => 'primary',
-            'menu_id'        => 'primary-menu',
-        ));
-        ?>
-    </nav>
-    <?php if (has_custom_logo()) : ?>
-        <div class="footer__logo">
-            <?php the_custom_logo(); ?>
+    <div class="footer__container">
+        <?php if (has_custom_logo()) : ?>
+            <div class="footer__logo">
+                <?php the_custom_logo(); ?>
+            </div>
+        <?php endif; ?>
+
+        <nav class="footer__nav">
+            <?php
+            wp_nav_menu(array(
+                'theme_location' => 'footer_menu',
+                'menu_id'        => 'footer-menu',
+                'container'      => false,
+                'menu_class'     => 'footer__menu',
+            ));
+            ?>
+        </nav>
+        <div class="footer__right-container">
+            <div class="footer__social">
+                <a href="https://www.facebook.com/your-page" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+
+            <p class="footer__rights">&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. Tous droits réservés.</p>
         </div>
-    <?php endif; ?>
-    <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. Tous droits réservés</p>
+    </div>
+    <div class="footer__bottom">Made by <a href="https://www.charlymuziotti.fr/" target="_blank">Charly Muziotti</a> with ❤️</div>
 </footer>
 
 <?php wp_footer(); ?>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var toTopButton = document.getElementById('toTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                toTopButton.classList.add('show');
+            } else {
+                toTopButton.classList.remove('show');
+            }
+        });
+
+        toTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    });
     document.addEventListener('DOMContentLoaded', function() {
         var header = document.querySelector('.header');
         var lastScrollTop = 0;
@@ -54,7 +90,6 @@
             burgerMenu.classList.toggle('active');
         });
     });
-
 </script>
 </body>
 

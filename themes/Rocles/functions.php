@@ -114,6 +114,46 @@ function register_point_de_vente_cpt()
 }
 add_action('init', 'register_point_de_vente_cpt');
 
+// Enregistrer le type de contenu personnalisé pour les conditionnements
+function create_conditionnements_post_type() {
+    $labels = array(
+        'name'                  => 'Conditionnements',
+        'singular_name'         => 'Conditionnement',
+        'menu_name'             => 'Conditionnements',
+        'name_admin_bar'        => 'Conditionnement',
+        'add_new'               => 'Ajouter un nouveau',
+        'add_new_item'          => 'Ajouter un nouveau conditionnement',
+        'new_item'              => 'Nouveau conditionnement',
+        'edit_item'             => 'Modifier le conditionnement',
+        'view_item'             => 'Voir le conditionnement',
+        'all_items'             => 'Tous les conditionnements',
+        'search_items'          => 'Rechercher des conditionnements',
+        'parent_item_colon'     => 'Conditionnement parent:',
+        'not_found'             => 'Aucun conditionnement trouvé.',
+        'not_found_in_trash'    => 'Aucun conditionnement trouvé dans la corbeille.'
+    );
+
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array('slug' => 'conditionnement'),
+        'capability_type'    => 'post',
+        'has_archive'        => true,
+        'hierarchical'       => false,
+        'menu_position'      => 5,
+        'supports'           => array('title', 'thumbnail')
+    );
+
+    register_post_type('conditionnement', $args);
+}
+add_action('init', 'create_conditionnements_post_type');
+
+
+
 // Masquer les articles standard dans le menu d'administration
 
 function remove_default_post_type_menu() {
@@ -233,3 +273,16 @@ function add_custom_query_vars($vars) {
     return $vars;
 }
 add_filter('query_vars', 'add_custom_query_vars');
+
+function enqueue_fs_lightbox() {
+    // Enqueue fs-lightbox JS
+    wp_enqueue_script('fs-lightbox-js', 'https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.0.9/index.min.js', array(), '1.0.7', true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_fs_lightbox');
+
+function enqueue_fontawesome() {
+    wp_enqueue_style('fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+}
+add_action('wp_enqueue_scripts', 'enqueue_fontawesome');
+
+

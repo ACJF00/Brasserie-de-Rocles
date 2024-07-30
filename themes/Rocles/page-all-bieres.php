@@ -30,6 +30,22 @@ get_template_part('parts/header');
         }
         ?>
 
+        <!-- Menu déroulant pour mobile -->
+        <div class="all-beers-filters-mobile">
+            <select id="beer-tag-filter" onchange="location = this.value;">
+                <option value="<?php echo esc_url(add_query_arg('beer_tag', '', home_url('/toutes-nos-bieres'))); ?>">Tous</option>
+                <?php
+                if ($tags && !is_wp_error($tags)) {
+                    foreach ($tags as $tag) {
+                        $tag_link = add_query_arg('beer_tag', $tag->slug, home_url('/toutes-nos-bieres'));
+                        $selected = ($current_tag === $tag->slug) ? 'selected' : '';
+                        echo '<option value="' . esc_url($tag_link) . '" ' . $selected . '>' . esc_html($tag->name) . '</option>';
+                    }
+                }
+                ?>
+            </select>
+        </div>
+
         <?php
         // Vérifier si un tag est filtré
         $tag_slug = get_query_var('beer_tag');
@@ -82,7 +98,6 @@ get_template_part('parts/header');
                             $description = get_field('description_biere');
                             $image = get_field('image_biere');
                             $prix = get_field('prix_biere');
-                            $conditionnement = get_field('conditionnement');
 
                             if ($description) {
                                 echo '<p class="all-beers-description">' . esc_html($description) . '</p>';
@@ -94,10 +109,6 @@ get_template_part('parts/header');
 
                             if ($prix) {
                                 echo '<p class="all-beers-prix">Prix: ' . esc_html($prix) . '</p>';
-                            }
-
-                            if ($conditionnement) {
-                                echo '<p class="all-beers-conditionnement">Conditionnement: ' . esc_html($conditionnement) . '</p>';
                             }
 
                             // Afficher les tags de bière

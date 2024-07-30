@@ -7,7 +7,6 @@
 get_template_part('parts/header');
 ?>
 
-
 <div class="content-area">
   <main class="site-main site-wrap">
 
@@ -47,8 +46,6 @@ get_template_part('parts/header');
               // Afficher les champs personnalisés
               $description = get_field('description_biere');
               $image = get_field('image_biere');
-              $prix = get_field('prix_biere');
-              $conditionnement = get_field('conditionnement');
               $recette = get_field('recette_biere');
 
               if ($description) {
@@ -63,24 +60,55 @@ get_template_part('parts/header');
                 ?>
                 <div class="single-beer-recipe__text">
                   <?php
-                if ($recette) {
-                  echo '<h2>Recette</h2>';
-                  echo '<div>' . $recette . '</div>';
-                }
-                ?>
+                  if ($recette) {
+                    echo '<h2>Recette</h2>';
+                    echo '<div>' . $recette . '</div>';
+                  }
+                  ?>
                 </div>
               </div>
-
-              <?php
-              if ($prix) {
-                echo '<p>Prix: ' . esc_html($prix) . '</p>';
-              }
-
-              if ($conditionnement) {
-                echo '<p>Conditionnement: ' . esc_html($conditionnement) . '</p>';
-              }
-              ?>
             </div>
+
+            <?php
+            // Vérifier si au moins un conditionnement est présent
+            $has_conditionnements = false;
+            for ($i = 1; $i <= 5; $i++) {
+              $conditionnement = get_field('conditionnement_' . $i);
+              if ($conditionnement) {
+                $has_conditionnements = true;
+                break;
+              }
+            }
+
+            if ($has_conditionnements) : ?>
+              <div class="single-beer-conditionnements">
+                <h2>Conditionnements</h2>
+                <div class="single-beer-conditionnements__container">
+                  <?php
+                  for ($i = 1; $i <= 5; $i++) {
+                    $conditionnement = get_field('conditionnement_' . $i);
+                    $prix_conditionnement = get_field('prix_' . $i);
+                    if ($conditionnement) {
+                      $icone_conditionnement = get_field('icone_conditionnement', $conditionnement->ID);
+                      echo '<div class="conditionnement">';
+                      if ($icone_conditionnement) {
+                        echo '<img src="' . esc_url($icone_conditionnement['url']) . '" alt="' . esc_attr($icone_conditionnement['alt']) . '" class="icone-conditionnement">';
+                      }
+                      echo '<h3>' . get_the_title($conditionnement->ID) . '</h3>';
+                      if (has_post_thumbnail($conditionnement->ID)) {
+                        echo get_the_post_thumbnail($conditionnement->ID, 'thumbnail');
+                      }
+                      if ($prix_conditionnement) {
+                        echo '<p>Prix: ' . esc_html($prix_conditionnement) . '</p>';
+                      }
+                      echo '</div>';
+                    }
+                  }
+                  ?>
+                </div>
+              </div>
+            <?php endif; ?>
+
 
             <!-- Swiper imbriqué pour les points de vente -->
             <div class="points-de-vente">
@@ -92,19 +120,29 @@ get_template_part('parts/header');
                   $points_de_vente = get_field('points_de_vente');
                   if ($points_de_vente) :
                     foreach ($points_de_vente as $point) :
+                      $adresse_complete = get_field('adresse_complete', $point->ID);
                       $ville = get_field('ville', $point->ID);
                       $adresse = get_field('adresse', $point->ID);
                       $site_web = get_field('site_web', $point->ID);
                       $logo = get_field('logo', $point->ID);
 
                       // Debugging
-                      echo '<!-- Point de vente - Ville: ' . esc_html($ville) . ', Adresse: ' . esc_html($adresse) . ', Site Web: ' . esc_url($site_web) . ' -->';
+                      echo '<!-- Point de vente - Adresse complète: ' . esc_html($adresse_complete) . ', Ville: ' . esc_html($ville) . ', Adresse: ' . esc_html($adresse) . ', Site Web: ' . esc_url($site_web) . ' -->';
+                      // Générer le lien Google Maps
+                      $google_maps_link = 'https://www.google.com/maps/search/?api=1&query=' . urlencode($adresse_complete);
+
+                      // Image générique par défaut
+                      $default_logo_url = get_template_directory_uri() . '/images/icon_generic.png';
                   ?>
                       <div class="swiper-slide">
                         <div class="point-de-vente-container">
                           <?php if ($logo) : ?>
                             <div class="point-de-vente-logo">
                               <img src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>">
+                            </div>
+                          <?php else : ?>
+                            <div class="point-de-vente-logo">
+                              <img src="<?php echo esc_url($default_logo_url); ?>" alt="Logo par défaut">
                             </div>
                           <?php endif; ?>
                           <?php if ($site_web) : ?>
@@ -121,6 +159,12 @@ get_template_part('parts/header');
 
                           <?php if ($adresse) : ?>
                             <p class="point-de-vente-address"><?php echo esc_html($adresse); ?></p>
+                          <?php endif; ?>
+
+                          <?php if ($adresse_complete) : ?>
+                            <a href="<?php echo esc_url($google_maps_link); ?>" target="_blank" class="google-maps-link">
+                              <p>Voir sur Google Map</p>
+                            </a>
                           <?php endif; ?>
                         </div>
                       </div>
@@ -140,6 +184,7 @@ get_template_part('parts/header');
               </div>
             </div>
             <!-- Fin du Swiper imbriqué -->
+
 
           </article>
 
